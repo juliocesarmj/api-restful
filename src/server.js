@@ -1,11 +1,13 @@
 const express = require('express');
 //const path = require('path');
-const routes = require('./routes/routes')
-const db = require('./database/db')
+const routes = require('./routes/routes');
+const db = require('./database/db');
 const app = express();
 
-db.connect()
-app.use(express.urlencoded({ extended: true }));
+db.connect();
+
+//habilita server para receber dados no formato json
+app.use(express.json());
 
 //rotas
 app.get('/', (req, res) => {
@@ -13,7 +15,7 @@ app.get('/', (req, res) => {
     title: 'Início',
   });
 });
-app.use('/api', routes)
+app.use('/api', routes);
 
 const port = process.env.PORT || 8080;
 
